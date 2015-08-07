@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Nov 04 08:54:51 CST 2010
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=CTCServerV3.0.jar
+manifest.mergeall=true
+manifest.mainclass=ctc.CTCServer
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=

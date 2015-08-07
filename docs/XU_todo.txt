@@ -1,0 +1,134 @@
+﻿//////////////////////////////////////////////
+车站之间通信协议：
+ 上站发送消息到下一站，下一站接到后发送一答复消息到上站
+
+
+只有当教师启动实验后,学员才可以成功登录系统。成功登录后，分配该学员的车站ID，车次信息等
+都返回给用户。当学员异步收到服务器发来的开始运行命令后进入真正执行状态。对车站连锁来讲，
+从始发站到终点站逐站异步执行。
+
+
+关于车站的分配方法：
+1）当一个学员登录时，系统随机为他分配一个车站（属于默认的组）。
+2）当学员个数大于车站个数时，系统会将多余的学员组成另一个组，再从所有车站中为 他分配车站
+即，将所有学员自动分组，不同的组可以对相同的车站进行操作，互不干涉
+
+目前服务器与客户机之间采用的是session通信，所以同一用户可以运行多个客户机。因为每一次
+连接，服务器都会为他创建一个不同的 session
+
+
+
+1）数据备份（在命令行方式下，即CMD命令下）
+  a)导出数据不导出结构
+  mysqldump -t simulatordb -uroot -p >d.sql
+  b)导出数据和表结构
+  mysqldump simulatordb -uroot -p > d.sql
+
+  2)数据恢复
+   进入mysql数据库控制台后
+   mysql>use simulatordb
+   mysql>source d:/d.sql(需要 指出d.sql所在目录的位置，如 d:\)
+   
+   
+   /*
+所有的控件有统一的背景色
+final Color bkColor = new Color(Display.getCurrent(),200,0,200);
+shell.setBackground(bkColor); //设置父控件的背景色
+shell.setBackgroundMode(SWT.INHERIT_DEFAULT);  //设置父控件的背景模式，即所有的子控件采用父控件的背景色
+ */
+ 
+ 如何设置Label的背景色为透明
+ shell.setBackgroundMode(SWT.INHERIT_DEFAULT);   
+ 
+	 for(Object key : stationTrainUpMap.keySet()){
+			newTreeSet = new TreeSet<SortedPlan_x>();
+			if (key.equals(stationName)){
+				newTreeSet = stationTrainUpMap.get(key);
+				break;
+			}
+} 
+
+/*
+Button的基本风格：
+SWT.PUSH：普通的按钮
+SWT.TOGGLE：toggle按钮
+SWT.CHECK：checkbox按钮
+SWT.RADIO：radio按钮
+SWT.ARROW：显示为箭头
+
+SWT.LEFT：居左。可以设置按钮文字属性或箭头（SWT.ARROW）的居左属性。
+SWT.CENTER：居中。
+SWT.RIGHT：居右。可以设置按钮文字属性或箭头（SWT.ARROW）的居右属性。
+SWT.UP：朝上。可以设置箭头（SWT.ARROW）的朝上属性。
+SWT.DOWN：朝下。可以设置箭头（SWT.ARROW）的朝下属性。
+
+*/
+
+//树的实现部分代码
+		treeShell = new  Composite(group,SWT.NONE);
+        final Tree tree = new Tree(treeShell, SWT.SINGLE|SWT.BORDER);//SWT.MULTI|SWT.CHECKSWT.FULL_SELECTION | 
+    	tree.setLocation(x,y);
+    	tree.setSize(150,height);
+		TreeItem treeItem1 = new TreeItem(tree, SWT.NONE);
+		treeItem1.setText("区段名");
+		
+		//从库中获取所有区段信息
+		String [] items = TdcsDataset.getAllDistrictName();
+		if(items != null && items.length != 0){
+			for (int i = 0; i < items.length; i++)
+			{
+				TreeItem treeItem11 = new TreeItem(treeItem1,SWT.NONE);
+				treeItem11.setText(items[i]);
+			}
+		}
+		tree.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				TreeItem ti = (TreeItem) e.item;
+				populateList(ti.getText());
+			}
+
+			private void populateList(String itemStr) {
+				if (itemStr.contains("-")){
+					TdcsDataset.setCurrentDistrictName(itemStr);
+				}
+				else
+					TdcsDataset.setCurrentDistrictName("");
+			}
+		    });
+		    
+		    
+		    etShellStyle(这里可以任意设置样式);能够设置的样式如下：（以下属性可以多选，但是某些属性相冲突时会导致设置的其他属性失效）
+SWT.BORDER //建立一个有边框但没有标题栏的窗口
+SWT.CLOSE //建立一个只有关闭按钮的窗口
+SWT.MIN  //建立一个不能最大化的窗口
+SWT.MAX, //建立一个可以最大化最小化的窗口
+SWT.NO_TRIM //建立一个没有任何边界和标题栏的窗口
+SWT.RESIZE //建立一个可以改变大小的窗口
+SWT.TITLE //建立一个没有标题栏图标，没有关闭按钮的窗口
+SWT.ON_TOP //建立一个总是在上的窗口，注意：此属性最好与CLOSE、MIN、MAX一起使用。
+SWT.TOOL  //建立一个类似工具栏的窗口
+SWT.APPLICATION_MODAL //建立一个APPLICATION模态窗口
+SWT.MODELESS //建立一个非模态窗口
+SWT.PRIMARY_MODAL //建立一个PRIMARY模态窗口
+SWT.SYSTEM_MODAL  //建立一个SYSTEM模态窗口
+     还有两个快捷属性来建立窗口
+SHELL_TRIM //建立一个标准模式的窗口，相当于属性设置为CLOSE | TITLE | MIN | MAX | RESIZE
+DIALOG_TRIM //建立一个对话框模式的窗口，相当于属性设置为TITLE | CLOSE | BORDER
+
+关于SWT多线程：
+在SWT内，有一个UI主线程的概念，自定义的线程不可操作UI控件，如果要操作则必须使用 
+display.asyncExec(new Runnable() {  
+     public void run() {  
+              // UI操作  
+     }  
+ });
+ 在Display.asyncExec()方法内运行的线程就是UI主线程，而不是用户自定义的线程
+ 
+  对于Display，在同一个线程里，不能申明2个Display实例。同样的，一个Display实例也不能跨线程使用。
+  如果你要在另外一个线程中显示一个窗体，（比如你要在任务完成后弹出一个对话框），你必须另外创建一个Display实例。不然会导致异常 
+   swt的syncExec ,asyncExec 以及timerExec都是伪线程执行方法,把它看成特别的Synchronizer调用就可以了,
+syncExec ,asyncExec 以及timerExec执行的线程要做的事只是改变UI部件的属性而已执行时间不能太长.此外的其他操作仍然由传统的线程来做.
+
+
+
+
