@@ -5,8 +5,8 @@
     <driver-url>jdbc:MySQL://127.0.0.1:3306/Simulatordb?useUnicode=true&amp;characterEncoding=UTF-8</driver-url>
     <driver-class>com.mysql.jdbc.Driver</driver-class>
     <driver-properties>
-      <property name="user" value="root"/>
-      <property name="password" value="123456"/>
+      <property name="user" value=""/>
+      <property name="password" value=""/>
     </driver-properties>
     <house-keeping-sleep-time>90000</house-keeping-sleep-time> 
     <prototype-count>5</prototype-count> 
